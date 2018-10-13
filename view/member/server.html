@@ -1,0 +1,120 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+ {{ @server->servername }}
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="/home/member/server">Daftar Server</a></li>
+        <li class="active">{{ @server->servername }}</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">  
+<div class="col-xs-12">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+             <center><i class="fa fa-warning fa-fw"></i> <h3 class="box-title"><b> Aturan membuat akun</b></h3> </center>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <ol>
+                   <li>Gunakan password yang sulit</li>
+                   <li>Username tanpa spasi</li>
+                   <li>Username dan password tidak boleh sama</li>
+                   <li>Sanggup mengikuti peraturan server: <a href="/tos.html" target="_blank">Disini</a></li>
+            </ol>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->    
+    </div> 
+       </div> 
+    <br>
+  <div class="row">     
+	        <check if="{{ @message }}">     
+				<div class="alert alert-{{ @message['type'] }} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <i class="icon fa fa-info"></i>
+                {{ @message['data'] }}
+              </div>
+            </check>
+    <br>
+         <div class="col-md-4">   
+  <div class="box box-solid box-danger">
+        <div class="box-header">
+     <i class="icon fa fa-server"></i><h3 class="box-title"><b>{{ @server->servername }}</b> {{ @server->active==1?'':'( Locked )'}}</h3>
+    <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div><!-- /.box-tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body">
+                    <table class="table">
+                        <tr>
+                            <td>Lokasi</td><td>{{ @server->country }}</td>
+                        </tr>
+                        <tr>
+                            <td>Host</td><td>{{ @server->host }}</td>
+                        </tr>
+                        <tr>
+                            <td>Harga</td><td>{{ @server->price }}</td>
+                        </tr>
+                    </table>
+        </div><!-- /.box-body -->   
+   </div><!-- /.box -->
+          </div>   <!-- /.col -->
+ 
+            <div class="col-md-6">   
+  <div class="box box-solid box-info">
+        <div class="box-header">
+     <i class="icon fa fa-server"></i><h3 class="box-title"><b>{{ @server->servername }}</b> {{ @server->active==1?'':'( Locked )'}}</h3>
+    <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div><!-- /.box-tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body">
+                     <form role="form" action="{{ @URI }}" method="POST">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input class="form-control" placeholder="Tulis Username" name="user" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" placeholder="Tulis Password" name="pass" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Masukan Ulang Password</label>
+                            <input class="form-control" placeholder="Tulis Ulang Password" name="pass_confirmation" type="text" required>
+                        </div>       
+      
+
+        <div class="box-footer text-center">                
+                        <button class="btn btn-primary">Beli Akun</button>
+                        <a href="/home/member/server" class="btn btn-default">Kembali</a>               
+        
+        
+                 </div><!-- /.box-footer-->
+                     
+    </form>
+                 </div><!-- /.box-body -->  
+        </div><!-- /.box -->
+ 
+          </div>     <!-- /.col -->   
+<br/>
+<br/>
+</div>
+    <br/>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

@@ -1,0 +1,123 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Daftar Akun Seller
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Daftar Seller</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+	        <check if="{{ @message }}">     
+				<div class="alert alert-{{ @message['type'] }} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <i class="icon fa fa-info"></i>
+                {{ @message['data'] }}
+              </div>
+            </check>
+   
+      <div class="row">
+        <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="fa fa-group fa-fw"></i><h3 class="box-title">List Akun</h3>
+			  <a href="{{ @URI }}/add" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Tambah Seller</a>
+            </div>
+            <!-- /.box-header -->    
+          
+            <div class="box-body">
+              <table id="fornesia" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                                        <th>#</th>
+                                    	<th>Username</th>
+                                    	<th>Email</th>
+                                    	<th>Saldo</th>
+                                    	<th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                                <repeat group="{{ @sellers}}" value="{{ @seller }}" counter="{{ @no }}">
+                                     <tr>
+                                        <td>{{ @no }}</td>
+                                        <td>{{ @seller->username }}</td>
+                                        <td>{{ @seller->email }}</td>                                     
+                                        <td>Rp.{{ @seller->saldo }}</td>
+                                        <td> 
+     <a href="/home/admin/seller/{{ @seller->id }}" class="btn btn-primary">Edit</a>
+                                            <check if="{{ @seller->active==1 }}">
+                                                <true>
+<a href="/home/admin/seller/{{ @seller->id }}/active/0" class="btn btn-warning">Lock</a>
+                                                </true>
+                                                <false>
+<a href="/home/admin/seller/{{ @seller->id }}/active/1" class="btn btn-success">Unlock</a>
+                                                </false>
+                                            </check>
+                                        </td>
+                                    </tr>
+                                </repeat>                                
+                 <tfoot>
+                <tr>
+                                        <th>#</th>
+                                    	<th>Username</th>
+                                    	<th>Email</th>
+                                    	<th>Saldo</th>
+                                    	<th>Action</th>
+                </tr>
+                </tfoot>
+              </table>               
+             </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+    
+              <div class="col-md-4">		  
+         <div class="box box-danger">
+            <div class="box-header with-border">
+                <i class="fa fa-money fa-fw"></i><h3 class="box-title">Quick Deposit</h3>
+            </div>
+            <!-- /.box-header -->
+         
+            <form role="form" action="/home/admin/seller/deposit" method="POST">
+              <div class="box-body">
+                       <div class="form-group">
+                            <label>Seller</label>
+                            <select class="form-control" name="id">
+                                <repeat group="{{ @sellers }}" value="{{ @seller }}">
+                                    <option value="{{ @seller->id }}">{{ @seller->username }}</option>
+                                </repeat>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Deposit</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">Rp. </span>
+                                <input class="form-control" placeholder="10000" name="deposit" type="number" min="100" step="100" required>
+                            </div>
+                        </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="reset" class="btn btn-danger">Reset</button>                        
+              </div>
+              
+            </form>
+          </div>
+          <!-- /.box -->
+  </div>
+
+</div>    
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

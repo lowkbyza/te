@@ -1,0 +1,144 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+     <check if="{{ @user->uid }}">
+                    <true>
+             <section class="content-header">         
+                 <h1> Edit User
+                      </h1>
+                    
+      <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="/home/admin/server">Daftar Server</a></li>
+        <li class="active">Edit User</li>
+      </ol>
+    </section>
+     
+					</true>
+                    <false>
+                      <section class="content-header">
+                      <h1>
+                        Tambah User
+						                          </h1>
+      <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="/home/admin/server">Daftar Server</a></li>
+        <li class="active">Tambah User</li>
+      </ol>
+    </section>
+                    </false>
+            </check>
+
+
+    <!-- Main content -->
+    <section class="content"> 
+    
+	        <check if="{{ @message }}">     
+				<div class="alert alert-{{ @message['type'] }} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <i class="icon fa fa-info"></i>
+                {{ @message['data'] }}
+              </div>
+            </check>
+    
+		<div class="row">
+        <div class="col-md-6">	
+			         <div class="box box-primary">
+            <div class="box-header with-border">
+               <i class="fa fa-user fa-fw"></i><h3 class="box-title">Account Details </h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="{{ @URI }}" method="POST">
+              <div class="box-body">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input class="form-control" placeholder="Username" name="user" type="text" value="{{ @user->user }}" required>
+                        </div>
+                        <check if="{{ !@user->uid }}">
+                            <div class="form-group">
+                                <label>Password</label>
+                      <input class="form-control" placeholder="New Password" name="pass" type="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Masukan Ulang Password</label>
+                      <input class="form-control" placeholder="Re-enter Password" name="pass_confirmation" type="password" required>
+                            </div>
+                        </check>
+              <div class="form-group">
+                <label>Exp</label>
+
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="datepicker" name="exp" value="{{ @user->exp?@user->exp:date("Y/m/d",strtotime("+30 days")) }}">
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+						
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                        <check if="{{ @user->uid }}">
+                            <true>
+                                <check if="{{ @user->lock }}">
+                                    <true>
+                                        <a href="{{ @URI.'/active/1' }}" class="btn btn-success">Unlock</a>
+                                    </true>
+                                    <false>
+                                        <a href="{{ @URI.'/active/0' }}" class="btn btn-warning">Lock</a>
+                                    </false>
+                                </check>
+                                <a href="{{ @URI.'/delete' }}" class="btn btn-danger hapus">Hapus</a>
+                            </true>
+                            <false>
+                                <a href="/home/admin/server/{{ @server->id }}/account/" class="btn btn-default">Kembali</a>
+                            </false>
+                        </check>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+          </div>		  
+       
+        <check if="{{ @user->uid }}">		  
+        <div class="col-md-6">		  
+         <div class="box box-primary">
+            <div class="box-header with-border">
+               <i class="fa fa-cog fa-spin"></i><h3 class="box-title">Ganti Password</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="{{ @URI }}" method="POST">
+              <div class="box-body">
+                        <div class="form-group">
+                            <label>Password Baru</label>
+                            <input class="form-control" placeholder="New Password" name="password" type="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Masukkan Ulang Password Baru</label>
+                            <input class="form-control" placeholder="Re-enter New Password" name="password_confirmation" type="password" required>
+                        </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+     <a href="/home/admin/server/{{ @server->id }}/account/" class="btn btn-default pull-right"><i class="fa fa-arrow-left"></i> Kembali</a>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+</check>
+		  
+          </div>		  
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

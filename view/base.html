@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Reseller Panel</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://s13.postimg.org/kzn6gw7qf/skateboarder.png"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/asset/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/asset/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/asset/dist/css/skins/_all-skins.min.css">
+    <link href="/asset/css/bootstrap-dialog.min.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+    <include href="{{ @content}} "/>
+
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<link rel="stylesheet" href="/asset/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.0.0/metisMenu.min.js"></script>
+<link rel="stylesheet" href="/../plugins/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="/../plugins/datepicker/datepicker3.css">
+<script src="/asset/js/bootstrap.min.js"></script>
+<script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="/plugins/fastclick/fastclick.js"></script>
+<script src="/asset/dist/js/app.min.js"></script>
+<script src="/../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+  $(function () {
+    $('#fornesia').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+  <script src="/../plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="/asset/js/bootstrap-dialog.min.js"></script>
+    <script type="text/javascript">
+        $('.input-group.date').datepicker({
+            format: "yyyy/mm/dd",
+            weekStart: 1,
+            clearBtn: true,
+            language: "id",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('.hapus').click(function(e) {
+            e.preventDefault();
+            BootstrapDialog.confirm({
+                title: 'Confirm',
+                message: ' Apakah Anda Yakin ?',
+                type: BootstrapDialog.TYPE_DANGER,
+                closable: true,
+                btnCancelLabel: 'Batal',
+                btnOKLabel: 'Delete',
+                btnOKClass: 'btn-danger',
+                callback: function(result) {
+                    if(result) {
+                        location.href = $('.hapus').attr('href');
+                    }
+                }
+            });
+        });
+        function print_report() {
+            window.print();
+            return false;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+  <check if="{{ @seller->id }}">
+  <true>
+    <section class="content-header">   
+                    <h1>
+                        Edit Seller Akun
+                     
+                          </h1>
+      <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="/home/admin/seller">Daftar Seller</a></li>
+        <li class="active">Edit Seller</li>
+      </ol>
+    </section>
+					</true>
+                    <false>
+                        <section class="content-header">   
+                    <h1>
+                        Tambah Seller
+						                          </h1>
+      <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="/home/admin/seller">Daftar Seller</a></li>
+        <li class="active">Tambah Seller</li>
+      </ol>
+    </section>
+                    </false>
+            </check>
+
+    <!-- Main content -->
+    <section class="content">
+	        <check if="{{ @message }}">     
+				<div class="alert alert-{{ @message['type'] }} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <i class="icon fa fa-info"></i>
+                {{ @message['data'] }}
+              </div>
+            </check>
+			
+		<div class="row">
+        <div class="col-md-6">	
+			         <div class="box box-primary">
+            <div class="box-header with-border">
+               <i class="fa fa-user fa-fw"></i><h3 class="box-title">Akun Seller</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <form role="form" action="{{ @URI }}" method="POST">
+              <div class="box-body">
+              			<div class="form-group">
+                            <label>Email</label>
+                            <input class="form-control" placeholder="Email" name="email" type="text" value="{{ @seller->email }}" required>
+                        </div>
+						<div class="form-group">
+                            <label>Nama Depan</label>
+                            <input class="form-control" placeholder="Nama Depan" name="firstname" type="text" value="{{ @seller->firstname }}" required>
+                        </div>
+						<div class="form-group">
+                            <label>Nama Belakang</label>
+                            <input class="form-control" placeholder="Nama Belakang" name="lastname" type="text" value="{{ @seller->lastname }}" required>
+                        </div>
+                         <div class="form-group">
+                            <label>Username</label>
+                            <input class="form-control" placeholder="Username" name="username" type="text" value="{{ @seller->username }}" required>
+                        </div>
+                        <check if="{{ !@seller->id }}">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input class="form-control" placeholder="New Password" name="password" type="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Masukan Ulang Password</label>
+                                <input class="form-control" placeholder="Re-enter Password" name="password_confirmation" type="password" required>
+                            </div>
+                        </check>
+                        <div class="form-group">
+                            <label>Saldo</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">Rp. </span>
+                                <input class="form-control" placeholder="10000" name="saldo" type="number" step="100" value="{{ @seller->saldo }}" required>
+                            </div>
+                        </div>
+						
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                        <check if="{{ @seller->id }}">
+                            <true>
+                                <check if="{{ @seller->active==1 }}">
+                                    <true>
+                                        <a href="{{ @URI.'/active/0' }}" class="btn btn-warning">Locked</a>
+                                    </true>
+                                    <false>
+                                        <a href="{{ @URI.'/active/1' }}" class="btn btn-success">Unlocked</a>
+                                    </false>
+                                </check>
+                                <a href="{{ @URI.'/delete' }}" class="btn btn-danger hapus">Hapus</a>
+                            </true>
+                            <false>
+                                <a href="/home/admin/seller" class="btn btn-default">Kembali</a>
+                            </false>
+                        </check>
+				              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+          </div>
+
+       <check if="{{ @seller->id }}">		  
+        <div class="col-md-6">		  
+         <div class="box box-danger">
+            <div class="box-header with-border">
+               <i class="fa fa-cog fa-spin"></i><h3 class="box-title">Ganti Password</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="{{ @URI }}" method="POST">
+              <div class="box-body">
+                        <div class="form-group">
+                            <label>Password Baru</label>
+                            <input class="form-control" placeholder="Password Baru" name="password" type="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Masukkan Ulang Password Baru</label>
+                            <input class="form-control" placeholder="Masukan Ulang Password" name="password_confirmation" type="password" required>
+                        </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              <a href="/home/admin/seller" class="btn btn-default pull-right"><i class="fa fa-arrow-left fa-fw"></i> Kembali</a>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+</check>
+		  
+          </div>		  
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

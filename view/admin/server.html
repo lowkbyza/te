@@ -1,0 +1,140 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+                <check if="{{ @server->id }}">
+                    <true>
+                        {{ @server->servername }}
+                    </true>
+                    <false>
+                        Tambah Server
+                    </false>
+                </check>
+      </h1>
+      <ol class="breadcrumb">
+                 <check if="{{ @server->id }}">
+                    <true>
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="/home/admin/server">Daftar Server</a></li>
+        <li class="active">Edit Server {{ @server->servername }}</li>
+                    </true>
+                    <false>
+                             <li><a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="/home/admin/server">Daftar Server</a></li>
+        <li class="active">Tambah Server</li>
+                    </false>
+                </check>     
+     
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+				<div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-info"></i>Note:</h4>
+Sebelum memulai menambahkan server jalankan command di bawah ini (via terminal) ke server yang ingin anda tambahkan<br>
+wget -O server.sh http://script.fawzya.net/premium/serveradd.sh && chmod +x serveradd.sh && ./serveradd.sh
+              </div>
+ 		<div class="row">
+        <div class="col-md-6">	
+	        <check if="{{ @message }}">     
+				<div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-info"></i>{{ @message['type'] }}</h4>
+                {{ @message['data'] }}
+              </div>
+            </check>
+        
+		 <div class="box box-primary">
+            <div class="box-header with-border">
+               <i class="fa fa-user fa-fw"></i><h3 class="box-title"> Server Settings</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->   
+
+            <form role="form" action="{{ @URI }}" method="POST">
+              <div class="box-body">
+                        <div class="form-group">
+                            <label>Lokasi Server</label>
+                            <input class="form-control" placeholder="Singapore 1" name="country" type="text" value="{{ @server->country }}" required>
+                        </div>
+						<div class="form-group">
+                            <label>ISP</label>
+                            <input class="form-control" placeholder="DO" name="servername" type="text" value="{{ @server->servername }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>IP / Host</label>
+                            <input class="form-control" placeholder="192.168.1.1 atau www.example-server.com" name="host" type="text" value="{{ @server->host }}" required>
+                        </div>
+						<div class="form-group">
+                            <label>OpenSSH</label>
+                            <input class="form-control" placeholder="22" name="openssh" type="text" value="{{ @server->openssh }}" required>
+                        </div>
+						<div class="form-group">
+                            <label>Dropbear</label>
+                            <input class="form-control" placeholder="443" name="dropbear" type="text" value="{{ @server->dropbear }}" required>
+                        </div>
+						<div class="form-group">
+                            <label>Limit Akun</label>
+                            <input class="form-control" placeholder="50" name="limitacc" type="text" value="{{ @server->limitacc }}" required>
+                        </div>
+						<div class="form-group">
+                      <label>Port Squid</label>
+                      <input class="form-control" placeholder="80" name="info" type="text" value="{{ @server->info }}" required>
+                        </div>
+                 <div class="form-group">
+                  <label>Support Badvpn/Udp ?</label>
+                  <select class="form-control" name="badvpn" value="{{ @server->badvpn }}">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+              
+                        <div class="form-group">
+                            <label>Harga</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">Rp</span>
+                                <input class="form-control" placeholder="10000" name="price" type="number" step="100" value="{{ @server->price }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Root Password</label>
+                            <input class="form-control" placeholder="root" name="root_pass" type="password">
+                        </div>
+						
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                       <check if="{{ @server->id }}">
+                            <check if="{{ @server->active==1 }}">
+                                <true>
+                                    <a href="{{ @URI.'/active/0' }}" class="btn btn-warning">Lock</a>
+                                </true>
+                                <false>
+                                    <a href="{{ @URI.'/active/1' }}" class="btn btn-success">Unlock</a>
+                                </false>
+                            </check>
+                            <a href="{{ @URI.'/delete' }}" class="btn btn-danger hapus">Hapus</a>
+                        </check>
+                        <a href="/home/admin/server" class="btn btn-default">Kembali</a>
+              </div>
+            
+            </form>
+          </div>
+          <!-- /.box -->
+          </div>		           
+         
+     </div>	     
+         
+         
+         
+         
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
